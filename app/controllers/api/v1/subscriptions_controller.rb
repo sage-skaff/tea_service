@@ -17,6 +17,16 @@ class Api::V1::SubscriptionsController < ApplicationController
         end
     end
 
+    def update
+        subscription = Subscription.find(params[:id])
+        if params[:update].present?
+            subscription.update(status: params[:update])
+            render json: SubscriptionSerializer.new(subscription), status: 200
+        else
+            render json: { error: "Unable to update subscription status" }
+        end
+    end
+
     private
     def subscription_params
         params.permit(:title, :price, :status, :customer_id, :tea_id)
