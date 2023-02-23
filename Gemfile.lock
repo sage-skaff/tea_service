@@ -237,8 +237,9 @@ DEPENDENCIES
   pry
   puma (~> 5.0)
   rails (~> 6.1.7, >= 6.1.7.2)
+  rspec
   rspec-rails
-  shoulda-matchers (~> 3.1)
+  shoulda-matchers
   simplecov
   tzinfo-data
 
