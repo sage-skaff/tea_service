@@ -1,5 +1,5 @@
 class Tea < ApplicationRecord
-    belongs_to :subscription
+    has_many :subscriptions
 
     validates_presence_of :title
     validates_presence_of :description
