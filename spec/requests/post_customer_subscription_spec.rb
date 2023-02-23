@@ -8,10 +8,10 @@ RSpec.describe 'Post Customer Subscription' do
         "title": "Yerba Mate Blend",
         "price": 15,
         "status": "active",
-        "customer_id": customer.id,
         "tea_id": tea.id
     }
-    post "/api/v1/customers/#{customer.id}/subscriptions", params: subscription_params
+    post "/api/v1/customers/#{customer.id}/subscriptions", params: subscription_params.to_json,
+                                                           headers: { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
 
     expect(response).to be_successful
     expect(response).to have_http_status(201)
