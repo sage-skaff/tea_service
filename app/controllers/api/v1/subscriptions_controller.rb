@@ -4,7 +4,7 @@ class Api::V1::SubscriptionsController < ApplicationController
             customer = Customer.find_by(id: params[:customer_id])
             render json: SubscriptionSerializer.new(customer.subscriptions), status: 200
         else
-            render json: { error: "Unable to find customer's subscriptions"}
+            render json: { error: "Unable to find customer's subscriptions"}, status: :bad_request
         end
     end
 
