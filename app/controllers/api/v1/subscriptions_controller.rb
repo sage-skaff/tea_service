@@ -23,7 +23,7 @@ class Api::V1::SubscriptionsController < ApplicationController
             subscription.update(status: params[:update])
             render json: SubscriptionSerializer.new(subscription), status: 200
         else
-            render json: { error: "Unable to update subscription status" }
+            render json: { error: "Unable to update subscription status" }, status: :bad_request
         end
     end
 
