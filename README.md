@@ -54,6 +54,134 @@ You should now be able to hit the API endpoints using Postman or a similar tool.
 Default host is `http://localhost:3000`
 
 ## Endpoints
+### Register a Customer
+- Request
+```
+POST /api/v1/customers
+Content-Type: application/json
+Accept: application/json
+
+{
+    "first_name": "Ahsoka",
+    "last_name": "Tano",
+    "email": "atano@jedi.com",
+    "address": "Jedi Temple, Coruscant"
+}
+```
+- Response
+```json
+{
+    "data": {
+        "id": "1",
+        "type": "customer",
+        "attributes": {
+            "first_name": "Ahsoka",
+            "last_name": "Tano",
+            "email": "atano@jedi.com",
+            "address": "Jedi Temple, Coruscant"
+        }
+    }
+}
+```
 ### Subscribe a Customer to a Tea Subscription
+- Request
+```
+POST /api/v1/customers/1/subscription
+Content-Type: application/json
+Accept: application/json
+
+{
+    "title": "Ashwagandha",
+    "price": 20,
+    "status": "active",
+    "tea_id": 3
+}
+```
+- Response
+```json
+{
+    "data": {
+        "id": "3",
+        "type": "subscription",
+        "attributes": {
+            "title": "Ashwagandha",
+            "status": "active",
+            "price": 20,
+            "customer_id": 1,
+            "tea_id": 3
+        }
+    }
+}
+```
+
 ### Cancel a Customer's Tea Subscription
+- Request
+```
+GET /api/v1/customers/1/subscriptions/7/?update=cancelled
+Content-Type: application/json
+Accept: application/json
+```
+- Response
+```json
+{
+    "data": {
+        "id": "3",
+        "type": "subscription",
+        "attributes": {
+            "title": "Ashwagandha",
+            "status": "cancelled",
+            "price": 20,
+            "customer_id": 1,
+            "tea_id": 3
+        }
+    }
+}
+```
+
 ### View Customer's Subscriptions (active and cancelled)
+- Request
+```
+GET /api/v1/customers/1/subscriptions
+Content-Type: application/json
+Accept: application/json
+```
+- Response
+```json
+{
+    "data": [
+        {
+            "id": "1",
+            "type": "subscription",
+            "attributes": {
+                "title": "Yerba Mate Blend",
+                "status": "active",
+                "price": 15,
+                "customer_id": 2,
+                "tea_id": 1
+            }
+        },
+        {
+            "id": "2",
+            "type": "subscription",
+            "attributes": {
+                "title": "Green Tea",
+                "status": "active",
+                "price": 17,
+                "customer_id": 2,
+                "tea_id": 2
+            }
+        },
+        {
+            "id": "3",
+            "type": "subscription",
+            "attributes": {
+                "title": "Ashwagandha",
+                "status": "cancelled",
+                "price": 20,
+                "customer_id": 2,
+                "tea_id": 3
+            }
+        }
+    ]
+}
+```
